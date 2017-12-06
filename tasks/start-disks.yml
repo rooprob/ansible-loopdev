@@ -1,10 +1,11 @@
 ---
 - template:
-    src: etc/init.d/diskloop.init.j2
+    src: templates/loopdev.init.j2
     dest: "/etc/init.d/{{ item.name }}"
     owner: root
     group: root
     mode: 0755
+  become: true
   with_items:
     "{{ losetup }}"
 
