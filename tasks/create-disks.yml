@@ -1,0 +1,11 @@
+---
+- name: "loopdev | Checking image creation status"
+  stat:
+    path: "{{ item.image }}"
+  register: _loopdev_creation_status
+  with_items: "{{ losetup }}"
+
+- name: "loopdev | initializing"
+  command: "truncate -s {{ item.size }} {{ item.image }}"
+  with_items: "{{ _loopdev_creation_status['results'] }}"
+  when: not item['stat']['exists']
