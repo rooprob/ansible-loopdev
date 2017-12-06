@@ -1,0 +1,17 @@
+---
+- template:
+    src: etc/init.d/diskloop.init.j2
+    dest: "/etc/init.d/{{ item.name }}"
+    owner: root
+    group: root
+    mode: 0755
+  with_items:
+    "{{ losetup }}"
+
+- name: diskloop | Ensuring disk is running
+  service:
+    name: "{{ item.name }}"
+    enabled: true
+  become: true
+  with_items:
+    "{{ losetup }}"

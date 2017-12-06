@@ -1,0 +1,6 @@
+---
+- name: rhel | Installing util-linux
+  yum:
+    name: util-linux-ng
+    state: present
+  become: true
