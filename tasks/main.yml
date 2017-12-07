@@ -11,3 +11,13 @@
 - include_tasks: start-disks.yml
   tags:
     - start-disks
+
+- include_tasks: format-disks.yml
+  tags:
+    - format-disks
+
+- include_tasks: mount-disks.yml
+  tags:
+    - mount-disks
+
+

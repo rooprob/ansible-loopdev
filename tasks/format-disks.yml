@@ -1,0 +1,10 @@
+---
+- name: "loopdev | Formatting status"
+  filesystem:
+    dev: "{{ item.device }}"
+    fstype: "{{ item.filesystem }}"
+
+  register: _loopdev_format_status
+  become: true
+  with_items: "{{ losetup }}"
+  when: "'filesystem' in item and item.filesystem"

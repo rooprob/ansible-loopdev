@@ -1,20 +1,12 @@
 ---
-# defaults file for rooprob-ansible-loopdisk
-
 losetup:
   - name: disk0
     device: /dev/loop0
     image: /var/disk0.img
-    mode: 0600
-    user: root
+    mode: "0600"
+    owner: root
     group: root
-    size: 128m
+    size: 10m
 
-  - name: disk1
-    device: /dev/loop1
-    image: /var/disk1.img
-    mode: 0600
-    user: root
-    group: root
-    size: 2g
-    filesystem: ext4
+# https://github.com/ansible/ansible/issues/31952
+# Note: octal mode value must be quoted

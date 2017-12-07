@@ -5,7 +5,22 @@
   register: _loopdev_creation_status
   with_items: "{{ losetup }}"
 
+- debug:
+    msg: "System {{ inventory_hostname }} has uuid {{ ansible_product_uuid }}"
+
+- debug:
+    var: _loopdev_creation_status
+
 - name: "loopdev | initializing"
-  command: "truncate -s {{ item.size }} {{ item.image }}"
+  command: "truncate -s {{ item.item.size }} {{ item.item.image }}"
+  become: true
   with_items: "{{ _loopdev_creation_status['results'] }}"
   when: not item['stat']['exists']
+
+- file:
+    path: "{{ item.image }}"
+    owner: "{{ item.owner }}"
+    group: "{{ item.group }}"
+    mode: "{{ item.mode }}"
+  with_items: "{{ losetup }}"
+  become: true

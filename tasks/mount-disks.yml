@@ -1,0 +1,23 @@
+---
+- file:
+    state: directory
+    path: "{{ item.mountpoint }}"
+    owner: "{{ item.mount_owner|default('root') }}"
+    group: "{{ item.mount_group|default('root') }}"
+    mode: "{{ item.mount_mode|default('0755') }}"
+  with_items: "{{ losetup }}"
+  become: true
+  when: "'mountpoint' in item and item.mountpoint"
+
+- name: "loopdev | Mount status"
+  mount:
+    fstype: "{{ item.filesystem }}"
+    path: "{{ item.mountpoint }}"
+    src: "{{ item.device}}"
+    opts: "{{ item.mount_opts|default('defaults') }}"
+    state: "{{ item.mount_state|default('mounted') }}"
+
+  register: _loopdev_mount_status
+  with_items: "{{ losetup }}"
+  become: true
+  when: "'mountpoint' in item and item.mountpoint"

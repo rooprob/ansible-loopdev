@@ -36,12 +36,29 @@ Including an example of how to use your role (for instance, with variables passe
 
     - hosts: servers
       roles:
-         - { role: username.rolename, x: 42 }
+         - rooprob.loopdev
+
+    losetup:
+      - name: disk0
+        device: /dev/loop0
+        image: /var/disk0.img
+        mode: "0600"
+        owner: root
+        group: root
+        size: 128m
+
+      - name: disk1
+        device: /dev/loop1
+        image: /var/disk1.img
+        mode: "0600"
+        owner: root
+        group: root
+        size: 2g
 
 License
 -------
 
-BSD
+MIT
 
 Author Information
 ------------------
