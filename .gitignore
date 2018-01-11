@@ -99,3 +99,9 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+*.retry
+Dockerfile
+.ansible-test/
+tests/inventory.local
+tests/*.retry

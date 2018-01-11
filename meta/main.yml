@@ -1,0 +1,16 @@
+galaxy_info:
+  author: Robert Fielding
+  description: An [Ansible](https://www.ansible.com) role to setup loopback disks
+  license: license (MIT)
+
+  min_ansible_version: 2.4
+
+  platforms:
+    - name: RHEL
+      versions:
+        - 6
+
+  galaxy_tags:
+    - disks
+
+dependencies: []

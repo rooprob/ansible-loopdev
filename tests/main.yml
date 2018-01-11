@@ -1,0 +1,35 @@
+---
+- name: Bring up docker containers
+  hosts: localhost
+  gather_facts: false
+  vars:
+    inventory:
+      - name: loopdev_host_1
+        image: "chrismeyers/centos6"
+  roles:
+    - role: provision_docker
+      provision_docker_inventory: "{{ inventory }}"
+
+- name: Run loopdev Tests
+  hosts: docker_containers
+  vars:
+    losetup:
+      - name: disk0
+        device: /dev/loop0
+        image: /var/disk0.img
+        mode: "0600"
+        owner: root
+        group: root
+        size: 10m
+      - name: disk1
+        device: /dev/loop1
+        image: /var/disk1.img
+        mode: "0600"
+        owner: root
+        group: root
+        size: 20m
+  roles:
+    - role: loopdev
+  tasks:
+    - name: Test ports
+      command: 'echo "hello world"'

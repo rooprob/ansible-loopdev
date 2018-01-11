@@ -1,0 +1,12 @@
+---
+losetup:
+  - name: disk0
+    device: /dev/loop0
+    image: /var/disk0.img
+    mode: "0600"
+    owner: root
+    group: root
+    size: 10m
+
+# https://github.com/ansible/ansible/issues/31952
+# Note: octal mode value must be quoted

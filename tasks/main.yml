@@ -1,0 +1,23 @@
+---
+- include_tasks: redhat.yml
+  tags:
+    - packages
+  when: ansible_os_family == "RedHat"
+
+- include_tasks: create-disks.yml
+  tags:
+    - create-disks
+
+- include_tasks: start-disks.yml
+  tags:
+    - start-disks
+
+- include_tasks: format-disks.yml
+  tags:
+    - format-disks
+
+- include_tasks: mount-disks.yml
+  tags:
+    - mount-disks
+
+

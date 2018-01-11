@@ -1,0 +1,71 @@
+#!/bin/sh
+#
+# Startup script for loop device {{ item.name }}
+#
+# chkconfig: 2345 10 90
+# description: Startup script for loop device setup
+#
+### BEGIN INIT INFO
+# Provides: {{ item.name }}
+# Required-Start:
+# Required-Stop:
+# Default-Start: 2 3 4 5
+# Default-Stop: 0 1 6
+# Short-Description: set up loop devices
+# Description: Startup script for loop device setup
+### END INIT INFO
+
+DISK_IMG="{{ item.image }}"
+DEVICE="{{ item.device }}"
+LOSETUP_CMD=/sbin/losetup
+
+# Source function library
+. /etc/rc.d/init.d/functions
+
+start () {
+  if ! $LOSETUP_CMD -j $DISK_IMG | grep -q {{ item.name }} ; then
+    echo $"Setting up loopdev {{ item.name }}..."
+    $LOSETUP_CMD $DEVICE $DISK_IMG
+  fi
+}
+
+status () {
+  echo $"Status DRBD loop device {{ item.name }}..."
+  $LOSETUP_CMD $DEVICE
+}
+
+stop() {
+  if $LOSETUP_CMD -j $DISK_IMG | grep -q {{ item.name }} ; then
+    echo $"Tearing down loopdev {{ item.name }}..."
+    $LOSETUP_CMD -d $DEVICE
+  fi
+}
+
+restart() {
+  stop
+  start
+}
+
+case "$1" in
+  start)
+      start
+      RETVAL=$?
+    ;;
+  stop)
+      stop
+      RETVAL=$?
+    ;;
+  status)
+      status
+      RETVAL=$?
+    ;;
+  restart)
+      restart
+      RETVAL=$?
+    ;;
+  *)
+    echo $"Usage: $0 {start|status|stop|restart}"
+    exit 1
+esac
+
+exit $RETVAL
