@@ -1,4 +1,7 @@
 Ansible role for managing loopdisks
+
+[![Build Status](https://travis-ci.org/rooprob/ansible-loopdev.svg?branch=master)](https://travis-ci.org/rooprob/ansible-loopdev)
+
 =======
 Role Name
 =========
@@ -13,14 +16,17 @@ losetup
 Role Variables
 --------------
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
-
 Array of loop device, disk image path and fs_type.
 
-Dependencies
-------------
+        losetup:
+          - name: disk0
+            device: /dev/loop0
+            image: /var/disk0.img
+            mode: "0600"
+            owner: root
+            group: root
+            size: 10m
 
-TODO
 
 Known Issues
 ------------
