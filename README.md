@@ -2,11 +2,12 @@ Ansible role for managing loopdisks
 
 [![Build Status](https://travis-ci.org/rooprob/ansible-loopdev.svg?branch=master)](https://travis-ci.org/rooprob/ansible-loopdev)
 
-=======
-Role Name
+loopdev
 =========
 
 Creates loopback disk via losetup on Linux.
+
+Useful for testing disks without attaching real devices to your instance, for example DRBD.
 
 Requirements
 ------------
@@ -65,6 +66,13 @@ License
 -------
 
 MIT
+
+Testing
+-------
+
+        ansible-galaxy install -r tests/requirements.yml -p tests/roles/
+        ansible-playbook -i tests/inventory tests/main.yml
+
 
 Author Information
 ------------------
