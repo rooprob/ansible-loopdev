@@ -6,6 +6,12 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [1.0.2] - 2018-01-25
+- Fix init scripts for non RHEL systems
+
+## [1.0.1] - 2018-01-12
+- Fix galaxy OS reference
+
 ## [1.0.0] - 2018-01-11
 ### Added
 - Support for CentOS/RHEL
