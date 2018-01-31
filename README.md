@@ -7,7 +7,7 @@ loopdev
 
 Creates loopback disk via losetup on Linux.
 
-Useful for testing disks without attaching real devices to your instance, for example DRBD.
+Useful for additional disks without attaching real devices to your instance.
 
 Requirements
 ------------
@@ -32,9 +32,7 @@ Array of loop device, disk image path and fs_type.
 Known Issues
 ------------
 
-Only supports RHEL 6.
-
-Raise PR for RHEL 7 (systemd integration), package differences with Debian, FreeBSD, NetBSD etc.
+None at this time.
 
 Example Playbook
 ----------------
@@ -70,11 +68,17 @@ MIT
 Testing
 -------
 
-        ansible-galaxy install -r tests/requirements.yml -p tests/roles/
-        ansible-playbook -i tests/inventory tests/main.yml
+Building locally with Vagrant
 
+        pip install -r requirements.txt
+        molecule test
 
-Author Information
-------------------
+Requires Vagrant and VirtualBox, tested on MacOS High Sierra.
 
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+Travis
+------
+
+Travis supports the play execution only. The use of loop devices requires privileged access to the host. Travis doesn't support Vagrant.
+
+-        ansible-galaxy install -r tests/requirements.yml -p tests/roles/
+-        ansible-playbook -i tests/inventory tests/main.yml

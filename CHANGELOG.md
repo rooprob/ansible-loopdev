@@ -6,8 +6,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
-## [1.0.2] - 2018-01-25
+## [1.0.2] - 2018-02-01
+- Add molecule test framework
 - Fix init scripts for non RHEL systems
+- Add systemd support for compatible platforms
 
 ## [1.0.1] - 2018-01-12
 - Fix galaxy OS reference

@@ -1,0 +1,15 @@
+[Unit]
+Description=loop device {{ item.name }}
+After=basic.target
+Before=network.target, multi-user.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+
+ExecStart=-/sbin/losetup {{ item.device }} {{ item.image }}
+
+ExecStop=/sbin/losetup -d {{ item.device }}
+
+[Install]
+WantedBy=multi-user.target

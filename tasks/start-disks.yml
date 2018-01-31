@@ -1,5 +1,6 @@
 ---
-- template:
+- name: service | installing init script
+  template:
     src: templates/loopdev.init.j2
     dest: "/etc/init.d/{{ item.name }}"
     owner: root
@@ -8,8 +9,21 @@
   become: true
   with_items:
     "{{ losetup }}"
+  when: ansible_service_mgr == 'sysvinit' or ansible_service_mgr == 'upstart'
 
-- name: diskloop | Ensuring disk is running
+- name: service | installing systemd script
+  template:
+    src: templates/systemd.unit.j2
+    dest: "/etc/systemd/system/{{ item.name }}.service"
+    owner: root
+    group: root
+    mode: 0755
+  become: true
+  with_items:
+    "{{ losetup }}"
+  when: ansible_service_mgr == 'systemd'
+
+- name: service | Ensuring disk is running
   service:
     name: "{{ item.name }}"
     enabled: true

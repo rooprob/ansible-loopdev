@@ -1,0 +1,7 @@
+---
+- name: Prepare
+  hosts: all
+  gather_facts: false
+  tasks:
+    - include_tasks: prepare-debian.yml
+    - include_tasks: prepare-redhat.yml

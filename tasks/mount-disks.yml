@@ -1,5 +1,6 @@
 ---
-- file:
+- name: "loopdev | Creating mountpoint"
+  file:
     state: directory
     path: "{{ item.mountpoint }}"
     owner: "{{ item.mount_owner|default('root') }}"
