@@ -19,9 +19,6 @@ DISK_IMG="{{ item.image }}"
 DEVICE="{{ item.device }}"
 LOSETUP_CMD=/sbin/losetup
 
-# Source function library
-. /etc/rc.d/init.d/functions
-
 start () {
   if ! $LOSETUP_CMD -j $DISK_IMG | grep -q {{ item.name }} ; then
     echo $"Setting up loopdev {{ item.name }}..."

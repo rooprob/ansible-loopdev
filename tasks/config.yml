@@ -1,8 +1,6 @@
-
+---
 - name: config | Checking image format status
   stat:
     path: "{{ item.image }}"
   register: _loopdev_creation_status
   with_items: "{{ losetup }}"
-
-

@@ -1,0 +1,8 @@
+---
+- name: prepare debian | Install python for Ansible
+  raw: test -e /usr/bin/apt && (apt -y update && apt install -y python-minimal)
+  ignore_errors: yes
+  register: output
+  changed_when: output.stdout != ""
+  become: true
+- setup:

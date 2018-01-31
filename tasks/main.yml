@@ -19,5 +19,3 @@
 - include_tasks: mount-disks.yml
   tags:
     - mount-disks
-
-

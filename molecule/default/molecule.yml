@@ -1,0 +1,36 @@
+---
+driver:
+  name: vagrant
+  provider:
+    name: virtualbox
+lint:
+  name: yamllint
+platforms:
+  - name: stretch64
+    box: debian/stretch64
+  - name: xenial64
+    box: ubuntu/xenial64
+  - name: centos6
+    box: centos/6
+  - name: centos7
+    box: centos/7
+provisioner:
+  name: ansible
+  lint:
+    name: ansible-lint
+  inventory:
+    group_vars:
+      losetup:
+        - name: disk0
+          device: /dev/loop0
+          image: /var/disk0.img
+          mode: "0600"
+          owner: root
+          group: root
+          size: 10m
+scenario:
+  name: default
+verifier:
+  name: testinfra
+  lint:
+    name: flake8

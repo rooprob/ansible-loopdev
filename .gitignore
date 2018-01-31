@@ -105,3 +105,7 @@ Dockerfile
 .ansible-test/
 tests/inventory.local
 tests/*.retry
+molecule/*/.cached/
+molecule/*/.molecule/
+molecule/*/*.log
+

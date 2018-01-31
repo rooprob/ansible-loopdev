@@ -11,7 +11,8 @@
   with_items: "{{ _loopdev_creation_status['results'] }}"
   when: not item['stat']['exists']
 
-- file:
+- name: loopdev | set permissions
+  file:
     path: "{{ item.image }}"
     owner: "{{ item.owner }}"
     group: "{{ item.group }}"
