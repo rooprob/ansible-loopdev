@@ -78,7 +78,13 @@ Requires Vagrant and VirtualBox, tested on MacOS High Sierra.
 Travis
 ------
 
-Travis supports the play execution only. The use of loop devices requires privileged access to the host. Travis doesn't support Vagrant.
+To run the test playbook(s) in the tests/ directory:
 
--        ansible-galaxy install -r tests/requirements.yml -p tests/roles/
--        ansible-playbook -i tests/inventory tests/main.yml
+  1. Install and start Docker.
+  1. Run (from the role root directory) `distro=[distro] playbook=[playbook] ./tests/test.sh`
+
+If you don't want the container to be automatically deleted after the test playbook is run, add the following environment variables: `cleanup=false container_id=$(date +%s)`
+
+Uses test shim
+    - `wget -O tests/test.sh https://gist.githubusercontent.com/geerlingguy/73ef1e5ee45d8694570f334be385e181/raw/`
+

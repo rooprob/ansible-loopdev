@@ -1,38 +1,16 @@
 ---
-sudo: required
-dist: trusty
-language: python
-python:
-  - "2.7"
-services:
-  - docker
-env:
-  global:
-    - PATH="/usr/bin:$PATH"
-addons:
-  apt:
-    packages:
-      - docker-ce
+services: docker
 
-install:
-  - sudo pip install docker-py
-  # software-properties-common for ubuntu 14.04
-  # python-software-properties for ubuntu 12.04
-  - sudo apt-get install -y sshpass software-properties-common python-software-properties
-  - sudo apt-add-repository -y ppa:ansible/ansible
-  #  https://github.com/travis-ci/travis-ci/issues/8581
-  - sudo rm /etc/apt/sources.list.d/mongodb-3.4.list
-  - sudo apt-get update -qq
-  - sudo apt-get install -y ansible
-  - sudo rm /usr/bin/python && sudo ln -s /usr/bin/python2.7 /usr/bin/python
-  - ansible-galaxy install -r tests/requirements.yml -p tests/roles/
+env:
+  - distro: centos7
+  - distro: centos6
+  - distro: ubuntu1604
+  - distro: ubuntu1404
+  - distro: debian8
 
 script:
-  # Ensure any invocation of ansible-playbook (i.e. sudo) results in host_key_checking disabled
-  - sudo ansible all -i "127.0.0.1," -m lineinfile -a "regexp=^#host_key_checking dest=/etc/ansible/ansible.cfg line='host_key_checking = False'" -c local
-  - ansible-playbook -i tests/inventory tests/main.yml --syntax-check
-  - sudo ansible-playbook -i tests/inventory tests/main.yml
+  # Run tests.
+  - ${PWD}/tests/test.sh
 
 notifications:
-  # notify ansible galaxy of test results
-  webhooks: http://galaxy-qa.ansible.com/api/v1/notifications/
+  webhooks: https://galaxy.ansible.com/api/v1/notifications/
