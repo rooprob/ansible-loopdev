@@ -1,7 +1,7 @@
 ---
 - name: prepare redhat | Installing python-selinux
   raw: test -e /usr/bin/yum && (yum install -y libselinux-python)
-  ignore_errors: yes
+  ignore_errors: true
   register: output
   changed_when: output.stdout != ""
   become: true
