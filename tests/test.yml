@@ -1,0 +1,22 @@
+---
+- hosts: all
+
+  vars:
+    losetup:
+      - name: disk0
+        device: /dev/loop0
+        image: /var/disk0.img
+        mode: "0600"
+        owner: root
+        group: root
+        size: 10m
+      - name: disk1
+        device: /dev/loop1
+        image: /var/disk1.img
+        mode: "0600"
+        owner: root
+        group: root
+        size: 20m
+
+  roles:
+    - role_under_test
