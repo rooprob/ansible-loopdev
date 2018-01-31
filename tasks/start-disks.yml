@@ -17,7 +17,7 @@
     dest: "/etc/systemd/system/{{ item.name }}.service"
     owner: root
     group: root
-    mode: 0755
+    mode: 0644
   become: true
   with_items:
     "{{ losetup }}"
