@@ -1,7 +1,7 @@
 [Unit]
 Description=loop device {{ item.name }}
 After=basic.target
-Before=network.target, multi-user.target
+Before=network.target multi-user.target
 
 [Service]
 Type=oneshot
