@@ -18,11 +18,15 @@
 DISK_IMG="{{ item.image }}"
 DEVICE="{{ item.device }}"
 LOSETUP_CMD=/sbin/losetup
+PARTDETECT_CMD=/sbin/partprobe
 
 start () {
   if ! $LOSETUP_CMD -j $DISK_IMG | grep -q {{ item.name }} ; then
     echo $"Setting up loopdev {{ item.name }}..."
     $LOSETUP_CMD $DEVICE $DISK_IMG
+
+    echo $"Allocating devices for partitions (if any) {{ item.name }}..."
+    $PARTDETECT_CMD $DEVICE
   fi
 }
 

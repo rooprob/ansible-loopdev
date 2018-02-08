@@ -7,7 +7,7 @@ Before=network.target multi-user.target
 Type=oneshot
 RemainAfterExit=yes
 
-ExecStart=-/sbin/losetup {{ item.device }} {{ item.image }}
+ExecStart=-/sbin/losetup -P {{ item.device }} {{ item.image }}
 
 ExecStop=/sbin/losetup -d {{ item.device }}
 
