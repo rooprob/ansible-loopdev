@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [1.0.5] - 2018-02-08
 - Add losetup -P option for disks with paritition tables (systemd unit),
-- Add partprobe for init script as CentOS6 doesn't support losetup -P.
+- Add partprobe for init script as fallback for distros not supporting losetup -P.
 
 ## [1.0.4] - 2018-02-01
 - Revamp tests/ to mirror geerlingguy

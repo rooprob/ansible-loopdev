@@ -4,3 +4,9 @@
     name: util-linux-ng
     state: present
   become: true
+
+- name: rhel | Installing parted
+  yum:
+    name: parted
+    state: present
+  become: true
