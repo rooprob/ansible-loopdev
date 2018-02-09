@@ -4,6 +4,11 @@
     - packages
   when: ansible_os_family == "RedHat"
 
+- include_tasks: debian.yml
+  tags:
+    - packages
+  when: ansible_os_family == "Debian"
+
 - include_tasks: create-disks.yml
   tags:
     - create-disks

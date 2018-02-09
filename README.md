@@ -28,11 +28,16 @@ Array of loop device, disk image path and fs_type.
             group: root
             size: 10m
 
+Partitions
+----------
+
+You may create partitions on the loop disk. The devices for these partitions will be loaded on boot.
+See also partprobe and losetup -P.
 
 Known Issues
 ------------
 
-None at this time.
+CentOS6 partprobe doesn't allocate /dev/loop*p* devices. Use kpart -a to put them in /dev/mapper instead. They must be unallocated with kpart -d before stop.
 
 Example Playbook
 ----------------
